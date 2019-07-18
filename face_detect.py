@@ -15,8 +15,17 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # Detect faces in the image
 faces = faceCascade.detectMultiScale(
     gray,
-    scaleFactor=1.1,
+    scaleFactor=1.2,
     minNeighbors=5,
     minSize=(30, 30),
-    flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+    flags=cv2.CASCADE_SCALE_IMAGE
 )
+
+print("Found {0} faces!".format(len(faces)))
+
+# Draw a rectangle around the faces
+for (x, y, width, height) in faces:
+    cv2.rectangle(image, (x, y), (x+width, y+height), (0, 255, 0), 2)
+
+cv2.imshow("Faces found", image)
+cv2.waitKey(0)
